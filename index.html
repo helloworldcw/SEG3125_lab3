@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+  <! This style sheet is taken from https://www.w3schools.com/howto/howto_js_tabs.asp>
+    <link href="styles/styles.css" rel="stylesheet" type="text/css">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css">
+</head>
+
+<body id="body">
+
+
+  <div class="view">
+    <div class="site-logo">
+      <img src="./assets/Halmart.png" alt="logo" style="width:13em; height:7em;">
+    </div>
+    <br>
+    <!-- Tab links, each one with an onclick event associated with it -->
+      <div class="tab">
+        <button class="tablinks active" onclick="openInfo(event, 'Client')">Client</button>
+        <button class="tablinks" onclick="openInfo(event, 'Products')">Products</button>
+        <button class="tablinks" onclick="openInfo(event, 'Cart')">Cart</button>
+      </div>
+    <hr style="height:2px;border-width:0;color:gray;background-color:gray">
+
+      <!-- Tab content -->
+    <div id="Client" class="tabcontent" style="display: block;">
+      <h3>Client Information <i class="glyphicon glyphicon-user"></i></h3>
+      <p><strong>Tell us a bit about you.</strong></p>
+      <strong>Dietary Restrictions:</strong>
+      <br>
+      <br>
+      <input type="checkbox" id="glutenIntolerant" name="glutenIntolerant" value="GlutenIntolerant" onchange="populateListProductChoices(this.id)">
+      <label for="glutenIntolerant">Gluten Intolerant</label><br>
+      <input type="checkbox" id="vegetarian" name="vegetarian" value="Vegetarian" onchange="populateListProductChoices(this.id)">
+      <label for="vegetarian">Vegetarian</label><br>
+      <br>
+      <strong>Preference:</strong>
+      <br>
+      <br>
+      <input type="checkbox" id="organic" name="organic" value="Organic" onchange="populateListProductChoices(this.id)">
+      <label for="organic">Organic</label><br>
+	  <input type="checkbox" id="nonorganic" name="nonorganic" value="Nonorganic" onchange="populateListProductChoices(this.id)">
+      <label for="nonorganic">Non-Organic</label><br>
+	  <input type="checkbox" id="diabetic" name="diabetic" value="Diabetic" onchange="populateListProductChoices(this.id)">
+      <label for="nonorganic">Diabetic</label><br>
+	  <input type="checkbox" id="lactoseintol" name="lactoseintol" value="LactoseIntolerant" onchange="populateListProductChoices(this.id)">
+      <label for="nonorganic">Lactose-Intolerant</label><br>
+    </div>
+
+    <div id="Products" class="tabcontent">
+      <h3>Your targeted products <i class="glyphicon glyphicon-th-large"></i></h3>
+      <p>Items shown below cater to your preferences and dietary restritions.</p>
+      <h3>Select items to buy:</h3>
+      <div id="displayProduct"></div>
+      <br>
+      <div style ="text-align: center;">
+        <button id="addCart" type="button" class="block" onclick="selectedItems();openInfo(event, 'Cart')">
+          Add selected items to cart.
+        </button>
+      </div>
+    </div>
+
+    <div id="Cart" class="tabcontent">
+      <h3>Cart <i class="glyphicon glyphicon-shopping-cart"></i></h3>
+      <p>Here is your cart.</p>
+      <div id="displayCart"></div>
+    </div>
+</div>
+  <br>
+
+  <div class="zoom" style="text-align: center;">
+    <button class="zoomIn" onclick="zoomIn()" id="zoomIn">Zoom In <i class="glyphicon glyphicon-zoom-in"></i></button>
+    <button class="zoomOut" onclick="zoomOut()" id="zoomOut" disabled>Zoom Out <i class="glyphicon glyphicon-zoom-out"></i></button> 
+  </div>
+  <br>
+  <br>
+  <br>
+
+
+  <p style="text-align: center;"><strong>Website designed by Jai Chauhan, Jonathan Lam, Udit Kulkarni, Caleb Wong</strong></p>
+
+
+
+  <script src="scripts/groceries.js"></script>
+  <script src="scripts/main.js"></script>
+
+</body>
+
+</html>

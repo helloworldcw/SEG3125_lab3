@@ -1,0 +1,120 @@
+/* This style sheet is taken from  https://www.w3schools.com/howto/howto_js_tabs.asp> */
+
+@font-face {
+  font-family: Gilroy;
+  src: url(../assets/Gilroy-Regular.ttf);
+  font-weight: 900;
+}
+
+@font-face {
+  font-family: Gilroy;
+  src: url(../assets/Gilroy-SemiBold.ttf);
+  font-weight: 900;
+}
+
+body {
+  font-family: 'Gilroy';
+  background-color: #f7e8d3 !important;
+}
+
+
+.view{
+  padding: 20px;
+  border-radius: 10px;
+  /*background-image: url(../assets/website-background-image-size-psd-vector-photo.jpg);*/
+}
+
+/* Style the tab */
+.tab {
+  /*padding: 10px;*/
+  list-style-type: none;
+  height: auto;
+  margin: auto;
+  overflow: visible;
+  /*background-color: black;*/
+  /*border-radius: 15px;*/
+}
+
+.zoom {
+  width: 100%;
+  float: right;
+  margin: 0;
+}
+
+.zoom button {
+  background-color: white;
+  padding: 15px;
+  font-weight: bold;
+}
+
+/* Style the buttons that are used to open the tab content */
+.tab button {
+  background-color: inherit;
+  color: black;
+  border: none;
+  outline: none;
+  cursor: pointer;
+  padding: 0px 16px;
+  border-radius: 10px;
+  font-size: large;
+  font-weight: bold;
+}
+
+/* Change background color of buttons on hover */
+.tab button:hover {
+  text-decoration: underline;
+  opacity: 0.9;
+}
+
+/* Create an active/current tablink class */
+.tab button.active {
+  text-decoration: underline;
+}
+
+/* Style the tab content */
+.tabcontent {
+  background-color: inherit;
+  display: none;
+  padding: 5px 25px;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+div.container{
+  overflow: hidden;
+}
+
+div.productDiv{
+  float: left;
+  background-color: white;
+  width: 200px;
+  line-height: auto;
+  text-align: center;
+  margin: 2px;
+  border-radius: 10px;
+  border: solid black;
+  display: block; 
+  padding:10px;
+  height: 300px;
+
+}
+
+img.productImg{
+  width: 100%;
+  max-height: 200px;
+  border-radius: 10px;
+}
+
+.block{
+  padding:12px 16px;
+  border-radius: 10px;
+}
+
+
+input.quantity{
+  width: 70px;
+  text-align: center;
+  padding: 3px 4px;
+  border-radius: 10px;
+}
