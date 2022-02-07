@@ -15,8 +15,6 @@
       <img src="./assets/Halmart.png" alt="logo" style="width:13em; height:7em;">
     </div>
     <br>
-    <!-- Tab links, each one with an onclick event associated with it -->
-
     <div class = "view2"> 
 
       <div id="Client" class="clientContent">
@@ -45,13 +43,11 @@
       <!-- Tab content -->
       <div class = "productContent">     
         <div id="Products" class="tabcontent" style="display: block;">
-          <h3>Your targeted products <i class="glyphicon glyphicon-th-large"></i></h3>
-          <p>Items shown below cater to your preferences and dietary restritions.</p>
-          <h3>Select items to buy:</h3>
+          <h3 style="padding-left: 15px;">Products <i class="glyphicon glyphicon-th-large"></i></h3>
           <div id="displayProduct"></div>
           <br>
           <div style ="text-align: center;">
-            <button id="addCart" type="button" class="block" onclick="selectedItems();openInfo(event, 'Cart')">
+            <button id="addCart" type="button" class="block" onclick="selectedItems()">
               Add selected items to cart.
             </button>
           </div>

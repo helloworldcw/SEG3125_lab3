@@ -145,7 +145,7 @@ function renderProductList(optionArray){
 
     var addToCartButton = document.createElement("button");
     addToCartButton.className = "cartButton";
-    addToCartButton.textContent = "+"
+    addToCartButton.textContent = "Add"
 
     var image  = document.createElement("img");
     image.className = "productImg";
