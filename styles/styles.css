@@ -14,14 +14,19 @@
 
 body {
   font-family: 'Gilroy';
-  background-color: #f7e8d3 !important;
 }
 
 
 .view{
+  width: 100%;
+  display: table;
   padding: 20px;
   border-radius: 10px;
   /*background-image: url(../assets/website-background-image-size-psd-vector-photo.jpg);*/
+}
+
+.view2{
+  display: table-row;
 }
 
 /* Style the tab */
@@ -73,6 +78,7 @@ body {
 
 /* Style the tab content */
 .tabcontent {
+  width: inherit;
   background-color: inherit;
   display: none;
   padding: 5px 25px;
@@ -81,13 +87,41 @@ body {
   border-bottom-right-radius: 3px;
 }
 
+div.clientContent{
+  width:200px;
+  background-color: inherit;
+  display: table-cell;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+div.cartcontent{
+  background-color: rgb(206, 182, 153);
+  width: 300px;
+  display: table-cell;
+  padding: 5px 25px;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
+div.productContent{
+  background-color: inherit;
+  display: table-cell;
+  border-top: none;
+  border-bottom-left-radius: 3px;
+  border-bottom-right-radius: 3px;
+}
+
 div.container{
-  overflow: hidden;
+  width: inherit;
+  overflow-y: scroll;
 }
 
 div.productDiv{
   float: left;
-  background-color: white;
+  background-color:inherit;
   width: 200px;
   line-height: auto;
   text-align: center;
@@ -96,13 +130,13 @@ div.productDiv{
   border: solid black;
   display: block; 
   padding:10px;
-  height: 300px;
+  height: 210px;
 
 }
 
 img.productImg{
-  width: 100%;
-  max-height: 200px;
+  width: 100px;
+  height: 100px;
   border-radius: 10px;
 }
 
@@ -117,4 +151,13 @@ input.quantity{
   text-align: center;
   padding: 3px 4px;
   border-radius: 10px;
+}
+
+.cartButton{
+  background-color: rgb(102, 189, 121);
+  font-weight: bold;
+  padding: 5px 10px;
+  border-radius: 50%;
+  float: right;
+
 }

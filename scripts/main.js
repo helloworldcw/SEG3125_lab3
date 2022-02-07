@@ -124,28 +124,13 @@ function renderProductList(optionArray){
   var div = document.createElement("div");
   div.className = "container";
   documentHtml.appendChild(div);
-  
-  //var table = document.createElement("table");
-  //documentHtml.appendChild(table);
 
   for (i = 0; i < sortedOptionArray.length; i++) {
 
     var div2 = document.createElement("div");
+    var div3 = document.createElement("div");
     div2.className = "productDiv";
     div.append(div2);
-
-    //var row = document.createElement("tr");
-    //table.appendChild(row);
-
-
-
-    // var name = document.createElement("th");
-    // var image = document.createElement("th");
-    // var price = document.createElement("th");
-    
-    // div2.appendChild(name);
-    // div2.appendChild(image);
-    // div2.appendChild(price);
 
     var productName = sortedOptionArray[i].name;
     var productPrice = sortedOptionArray[i].price;
@@ -157,6 +142,10 @@ function renderProductList(optionArray){
     checkbox.type = "checkbox";
     checkbox.name = "product";
     checkbox.value = productName;
+
+    var addToCartButton = document.createElement("button");
+    addToCartButton.className = "cartButton";
+    addToCartButton.textContent = "+"
 
     var image  = document.createElement("img");
     image.className = "productImg";
@@ -185,6 +174,8 @@ function renderProductList(optionArray){
     div2.appendChild(labelProductName);
     div2.appendChild(sp2);
     div2.appendChild(labelPrice);
+    div2.appendChild(sp3);
+    div2.appendChild(addToCartButton);
 
     // create a breakline node and add in HTML DOM
     // s2.appendChild(document.createElement("br"));
