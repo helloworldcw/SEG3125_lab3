@@ -1,10 +1,10 @@
 // This function is called when any of the tab is clicked
 // It is adapted from https://www.w3schools.com/howto/howto_js_tabs.asp
 const allItems = restrictListProducts(products)
-renderProductList(allItems)
+const activeCategory = new Set()
+let restrictedItems = []
 
 function openInfo(evt, tabName) {
-
   // Get all elements with class="tabcontent" and hide them
   tabcontent = document.getElementsByClassName("tabcontent");
   for (i = 0; i < tabcontent.length; i++) {
@@ -20,7 +20,6 @@ function openInfo(evt, tabName) {
   // Show the current tab, and add an "active" class to the button that opened the tab
   document.getElementById(tabName).style.display = "block";
   evt.currentTarget.className += " active";
-
 }
 
 function zoomIn() {
@@ -56,6 +55,24 @@ function zoomOut() {
   }
 }
 
+function toggleCategory(evt, category) {
+  if (activeCategory.has(category)) {
+    activeCategory.delete(category)
+    evt.currentTarget.className += "tablinks";
+  } else {
+    activeCategory.add(category)
+    evt.currentTarget.className += " active";
+  }
+  const newItems = []
+  const items = restrictedItems.length === 0 ? products : restrictedItems 
+  for (let i = 0 ; i < items.length; i+=1) {
+    if (activeCategory.has(items[i].category)) {
+      newItems.push(items[i])
+    }
+  }
+  renderProductList(newItems)
+}
+
 
 // generate a checkbox list from a list of products
 // it makes each product name as the label for the checkbos
@@ -79,8 +96,7 @@ function populateListProductChoices(slct1) {
   // for each item in the array, create a checkbox element, each containing information such as:
   // <input type="checkbox" name="product" value="Bread">
   // <label for="Bread">Bread/label><br>
-
-  renderProductList(optionArray)
+  restrictedItems = optionArray
 }
 
 // This function is called when the "Add selected items to cart" button in clicked
@@ -100,93 +116,125 @@ function selectedItems() {
   para.innerHTML = "You selected : ";
   para.appendChild(document.createElement("br"));
   for (i = 0; i < ele.length; i++) {
-    if (ele[i].checked) {
-      para.appendChild(document.createTextNode(ele[i].value));
+    if (ele[i].value > 0) {
+      const total = ele[i].price * parseInt(ele[i].value)
+      const formattedPrice = (Math.round(total * 100) / 100).toFixed(2);
+      para.appendChild(document.createTextNode(`${ele[i].id} (x${ele[i].value}) - $${formattedPrice}`));
       para.appendChild(document.createElement("br"));
-      chosenProducts.push(ele[i].value);
+      chosenProducts.push(total);
     }
   }
 
   // add paragraph and total price
   c.appendChild(para);
   c.appendChild(document.createTextNode("Total Price is $" + getTotalPrice(chosenProducts)));
-
 }
 
 function priceComparator(a, b) {
   return a.price > b.price ? 1 : -1
 }
 
-function renderProductList(optionArray){
-  var documentHtml = document.getElementById('displayProduct');
-  const sortedOptionArray = optionArray.sort(priceComparator);
+function categoryComparator(a, b) {
+  return a.category > b.category ? 1 : -1
+}
 
-  var div = document.createElement("div");
-  div.className = "container";
-  documentHtml.appendChild(div);
-  
-  //var table = document.createElement("table");
-  //documentHtml.appendChild(table);
+function renderProductList(optionArray) {
+  var s2 = document.getElementById('displayProduct');
+  s2.innerHTML = "";
+  const priceSortedOptionArray = optionArray.sort(priceComparator);
+  const sortedOptionArray = priceSortedOptionArray.sort(categoryComparator);
+
+  prevCategory = ""
 
   for (i = 0; i < sortedOptionArray.length; i++) {
-
-    var div2 = document.createElement("div");
-    div2.className = "productDiv";
-    div.append(div2);
-
-    //var row = document.createElement("tr");
-    //table.appendChild(row);
-
-
-
-    // var name = document.createElement("th");
-    // var image = document.createElement("th");
-    // var price = document.createElement("th");
-    
-    // div2.appendChild(name);
-    // div2.appendChild(image);
-    // div2.appendChild(price);
 
     var productName = sortedOptionArray[i].name;
     var productPrice = sortedOptionArray[i].price;
     var productImage = sortedOptionArray[i].src;
-    var quantity = sortedOptionArray[i].quantity;
+    var productCategory = sortedOptionArray[i].category;
 
-    // create the checkbox and add in HTML DOM
-    var checkbox = document.createElement("input");
-    checkbox.type = "checkbox";
-    checkbox.name = "product";
-    checkbox.value = productName;
+    // create the quantifier and add in HTML DOM
 
-    var image  = document.createElement("img");
-    image.className = "productImg";
+    if (productCategory !== prevCategory) {
+      var heading = document.createElement("h2");
+      heading.innerHTML = productCategory
+      s2.appendChild(heading)
+      prevCategory = productCategory
+    }
+
+    var quantity = document.createElement("input");
+    quantity.type = "number";
+    quantity.name = "product";
+    quantity.value = "0";
+    quantity.id = productName;
+    quantity.price = productPrice;
+    quantity.min = 0;
+    quantity.max = 10;
+    s2.appendChild(quantity);
+
+    // create image and add in HTML DOM
+    var image = document.createElement('img');
     image.src = productImage;
-    
+    s2.appendChild(image);
 
     formattedPrice = (Math.round(productPrice * 100) / 100).toFixed(2);
 
     // create a label for the checkbox, and also add in HTML DOM
-    var labelPrice = document.createElement('label')
-    var labelProductName = document.createElement('label')
-    
-    labelProductName.htmlFor = productName;
-    labelProductName.innerHTML = productName;
-    labelPrice.innerHTML = `$${formattedPrice}`;
-
-    // labelPrice.appendChild(document.createTextNode(`${productName} - $${formattedPrice}`));
-
-    var sp1 = document.createElement("br");
-    var sp2 = document.createElement("br");
-    var sp3 = document.createElement("br");
-
-    div2.appendChild(checkbox);
-    div2.appendChild(image);
-    div2.appendChild(sp1);
-    div2.appendChild(labelProductName);
-    div2.appendChild(sp2);
-    div2.appendChild(labelPrice);
+    var label = document.createElement('label')
+    label.htmlFor = productName;
+    label.appendChild(document.createTextNode(`${productName} - $${formattedPrice}/each`));
+    s2.appendChild(label);
 
     // create a breakline node and add in HTML DOM
-    // s2.appendChild(document.createElement("br"));
+    s2.appendChild(document.createElement("br"));
+  }
+}
+
+/* code from w3schools */
+// Get the modal
+var customer_modal = document.getElementById("myCustomerModal");
+
+// Get the button that opens the modal
+var customer_btn = document.getElementById("myCustomerBtn");
+
+// Get the <span> element that closes the modal
+var customer_span = document.getElementsByClassName("close")[0];
+
+// Get the modal
+var cart_modal = document.getElementById("myCartModal");
+
+// Get the button that opens the modal
+var cart_btn = document.getElementById("myCartBtn");
+
+// Get the <span> element that closes the modal
+var cart_span = document.getElementsByClassName("close")[1];
+
+// When the user clicks the button, open the modal 
+customer_btn.onclick = function() {
+  customer_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+customer_span.onclick = function() {
+  customer_modal.style.display = "none";
+}
+
+// When the user clicks the button, open the modal 
+cart_btn.onclick = function() {
+  cart_modal.style.display = "block";
+}
+
+// When the user clicks on <span> (x), close the modal
+cart_span.onclick = function() {
+  cart_modal.style.display = "none";
+}
+
+// When the user clicks anywhere outside of the modal, close it
+window.onclick = function(event) {
+  if (event.target == customer_modal) {
+    customer_modal.style.display = "none";
+  }
+  if (event.target == cart_modal) {
+    cart_modal.style.display = "none";
   }
 }
