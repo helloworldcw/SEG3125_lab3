@@ -1,38 +1,34 @@
-/* This style sheet is taken from  https://www.w3schools.com/howto/howto_js_tabs.asp> */
-
 @font-face {
   font-family: Gilroy;
   src: url(../assets/Gilroy-Regular.ttf);
-  font-weight: 900;
+  font-weight: 400;
 }
 
 @font-face {
   font-family: Gilroy;
   src: url(../assets/Gilroy-SemiBold.ttf);
-  font-weight: 900;
+  font-weight: 700;
 }
 
 body {
+  /*display: flex;
+  justify-content: center;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  width: 100%;
+  font-family: 'Gilroy';*/
   font-family: 'Gilroy';
   background-color: #f7e8d3 !important;
 }
 
-
-.view{
-  padding: 20px;
-  border-radius: 10px;
-  /*background-image: url(../assets/website-background-image-size-psd-vector-photo.jpg);*/
+h1 {
+  margin-bottom: 4px;
 }
 
-/* Style the tab */
-.tab {
-  /*padding: 10px;*/
-  list-style-type: none;
-  height: auto;
-  margin: auto;
-  overflow: visible;
-  /*background-color: black;*/
-  /*border-radius: 15px;*/
+img {
+  width: 64px;
+  height: 64px;
 }
 
 .zoom {
@@ -47,74 +43,135 @@ body {
   font-weight: bold;
 }
 
+/* Style the tab */
+.tab {
+  overflow: hidden;
+  color: white;
+  border: 1px solid #ccc;
+  background-color: #f1f1f1;
+}
+
 /* Style the buttons that are used to open the tab content */
 .tab button {
   background-color: inherit;
-  color: black;
+  float: left;
   border: none;
   outline: none;
   cursor: pointer;
-  padding: 0px 16px;
-  border-radius: 10px;
-  font-size: large;
-  font-weight: bold;
+  padding: 14px 16px;
+  transition: 0.3s;
 }
 
 /* Change background color of buttons on hover */
 .tab button:hover {
-  text-decoration: underline;
-  opacity: 0.9;
+  background-color: #ddd;
 }
 
 /* Create an active/current tablink class */
 .tab button.active {
-  text-decoration: underline;
+  background-color: #ccc;
 }
 
 /* Style the tab content */
 .tabcontent {
-  background-color: inherit;
-  display: none;
-  padding: 5px 25px;
-  border-top: none;
-  border-bottom-left-radius: 3px;
-  border-bottom-right-radius: 3px;
+  display: block;
+  margin-top: 12px;
+  padding: 6px 12px;
+  background-color: none;
+  border: 1px solid #222222;
+  text-align: left;
 }
 
-div.container{
-  overflow: hidden;
+.block-button {
+  border: none;
+  display: block;
+  margin-top: 8px;
+  background-color: rosybrown;
+  color: white;
+  padding: 16px 32px;
 }
 
-div.productDiv{
-  float: left;
-  background-color: white;
-  width: 200px;
-  line-height: auto;
-  text-align: center;
-  margin: 2px;
-  border-radius: 10px;
-  border: solid black;
-  display: block; 
-  padding:10px;
-  height: 300px;
+/* 
+  code below taken from w3schools.
+  https://www.w3schools.com/howto/tryit.asp?filename=tryhow_css_modal_bottom
+*/ 
 
+/* The Modal (background) */
+.modal {
+  display: none; /* Hidden by default */
+  position: fixed; /* Stay in place */
+  z-index: 1; /* Sit on top */
+  left: 0;
+  top: 0;
+  width: 100%; /* Full width */
+  height: 100%; /* Full height */
+  overflow: auto; /* Enable scroll if needed */
+  background-color: rgb(0,0,0); /* Fallback color */
+  background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+  -webkit-animation-name: fadeIn; /* Fade in the background */
+  -webkit-animation-duration: 0.4s;
+  animation-name: fadeIn;
+  animation-duration: 0.4s
 }
 
-img.productImg{
+/* Modal Content */
+.modal-content {
+  position: fixed;
+  bottom: 0;
+  background-color: #fefefe;
   width: 100%;
-  max-height: 200px;
-  border-radius: 10px;
+  -webkit-animation-name: slideIn;
+  -webkit-animation-duration: 0.4s;
+  animation-name: slideIn;
+  animation-duration: 0.4s
 }
 
-.block{
-  padding:12px 16px;
-  border-radius: 10px;
+/* The Close Button */
+.close {
+  color: white;
+  float: right;
+  font-size: 28px;
+  font-weight: bold;
 }
 
+.close:hover,
+.close:focus {
+  color: #000;
+  text-decoration: none;
+  cursor: pointer;
+}
 
-input.quantity{
-  width: 70px;
-  text-align: center;
-  padding: 3px 4px;
-  border-radius: 10px;
+.modal-header {
+  padding: 2px 16px;
+  background-color: #EF9A9A;
+  color: white;
+}
+
+.modal-body {padding: 2px 16px;}
+
+.modal-footer {
+  padding: 2px 16px;
+  background-color: #EF9A9A;
+  color: white;
+}
+
+/* Add Animation */
+@-webkit-keyframes slideIn {
+  from {bottom: -300px; opacity: 0} 
+  to {bottom: 0; opacity: 1}
+}
+
+@keyframes slideIn {
+  from {bottom: -300px; opacity: 0}
+  to {bottom: 0; opacity: 1}
+}
+
+@-webkit-keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
+}
+
+@keyframes fadeIn {
+  from {opacity: 0} 
+  to {opacity: 1}
 }
